@@ -10,7 +10,7 @@
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/Screenshot%202024-10-07%20171159.png" alt="astral plane" />
 
 <h2>Blaze Fire</h2>
-<h3>Shoots mini blaze fireballs from your sword (on a cooldown)</h3>
+<h3>Shoots mini blaze fireballs from your sword</h3>
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/blaze%20fire.png" alt="blaze fire" />
 
 <h2>Forage</h2>
