@@ -1,0 +1,75 @@
+{
+  "minecraft:recipes/transportation/mangrove_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2024-05-11 17:04:27 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/cherry_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:birch_forest": "2024-05-11 17:04:29 -0400",
+      "minecraft:dripstone_caves": "2024-05-11 17:05:32 -0400",
+      "minecraft:grove": "2024-05-11 17:06:21 -0400",
+      "minecraft:jagged_peaks": "2024-05-11 17:06:41 -0400",
+      "minecraft:frozen_peaks": "2024-05-11 17:06:23 -0400",
+      "minecraft:old_growth_birch_forest": "2024-05-11 17:06:17 -0400",
+      "minecraft:deep_dark": "2024-05-11 17:05:46 -0400"
+    },
+    "done": false
+  },
+  "minecraft:recipes/transportation/bamboo_raft": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "in_water": "2024-05-11 17:04:59 -0400"
+    },
+    "done": true
+  },
+  "DataVersion": 3465
+}

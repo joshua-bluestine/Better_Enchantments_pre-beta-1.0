@@ -1,0 +1,35 @@
+{
+  "minecraft:recipes/misc/pink_dye_from_pink_petals": {
+    "criteria": {
+      "has_pink_petals": "2024-06-10 12:55:09 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2024-06-10 12:55:10 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2024-06-10 12:55:09 -0400"
+    },
+    "done": true
+  },
+  "minecraft:story/shiny_gear": {
+    "criteria": {
+      "diamond_helmet": "2024-06-10 12:55:09 -0400"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:river": "2024-06-10 12:55:48 -0400",
+      "minecraft:forest": "2024-06-10 12:56:01 -0400",
+      "minecraft:plains": "2024-06-10 12:55:12 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 3465
+}

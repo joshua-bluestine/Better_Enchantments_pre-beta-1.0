@@ -1,0 +1,23 @@
+{
+  "type": "coolenchants:astral_plane_type",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "coolenchants:astral_plain",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "minecraft:sandstone",
+          "height": 1
+        },
+        {
+          "block": "minecraft:sand",
+          "height": 1
+        }
+
+      ],
+      "structure_overrides": []
+    }
+  }
+}

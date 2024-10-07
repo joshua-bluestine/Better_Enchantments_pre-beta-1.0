@@ -1,0 +1,38 @@
+{
+	"schemaVersion": 1,
+	"id": "coolenchants",
+	"version": "0.1-1.20.1",
+	"name": "Cool Enchants",
+	"description": "This is the enchantments, HO!!!!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "NIT",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.josh.coolenchants.CoolEnchants"
+		],		"client": [
+			"net.josh.coolenchants.CoolEnchantsClient"
+		],
+		"fabric-datagen": [
+			"net.josh.coolenchants.CoolEnchantsDataGenerator"
+		]
+	},
+	"mixins": [
+		"coolenchants.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

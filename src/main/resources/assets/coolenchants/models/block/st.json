@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_torch",
+  "variants": {
+    "": { "model": "coolenchants:block/see_through" }
+  }
+}

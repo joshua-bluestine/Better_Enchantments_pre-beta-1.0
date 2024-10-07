@@ -1,0 +1,49 @@
+{
+  "type": "coolenchants:astral_plane_type",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "minecraft:overworld",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "preset": "minecraft:overworld",
+      "biomes": [
+        {
+          "biome": "minecraft:oak_forest",
+          "parameters": {
+            "temperature": -0.15,
+            "humidity": 0.2,
+            "continentalness": 0.12,
+            "erosion": 0,
+            "weirdness": 0.1,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "minecraft:birch_forest",
+          "parameters": {
+            "temperature": 0.2,
+            "humidity": 0.1,
+            "continentalness": 0.15,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "minecraft:plains",
+          "parameters": {
+            "temperature": 0.15,
+            "humidity": 0,
+            "continentalness": 0.5,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        }
+      ]
+    }
+  }
+}

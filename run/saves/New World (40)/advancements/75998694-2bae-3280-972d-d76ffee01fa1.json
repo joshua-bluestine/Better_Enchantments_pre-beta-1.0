@@ -1,0 +1,37 @@
+{
+  "minecraft:story/obtain_armor": {
+    "criteria": {
+      "iron_helmet": "2024-09-27 14:21:38 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_nugget_from_smelting": {
+    "criteria": {
+      "has_iron_helmet": "2024-09-27 14:21:38 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2024-09-27 14:19:30 -0400"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/iron_nugget_from_blasting": {
+    "criteria": {
+      "has_iron_helmet": "2024-09-27 14:21:38 -0400"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:birch_forest": "2024-09-27 14:22:25 -0400",
+      "minecraft:dark_forest": "2024-09-27 14:22:01 -0400",
+      "minecraft:river": "2024-09-27 14:22:24 -0400",
+      "minecraft:dripstone_caves": "2024-09-27 14:21:58 -0400",
+      "minecraft:old_growth_birch_forest": "2024-09-27 14:21:30 -0400"
+    },
+    "done": false
+  },
+  "DataVersion": 3465
+}
