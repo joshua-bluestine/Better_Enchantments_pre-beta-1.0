@@ -7,7 +7,7 @@
 
 <h2>Astral Plane</h2>
 <h3>Teleports you to the astral plane dimension, where every block counts for 32 in the overworld</h3>
-<img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/Screenshot%202024-10-07%20171159.png" alt="astral plane" />
+<img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/astral%20plane.png" alt="astral plane" />
 
 <h2>Blaze Fire</h2>
 <h3>Shoots mini blaze fireballs from your sword</h3>
