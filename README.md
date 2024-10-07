@@ -1,19 +1,31 @@
-# Image Gallery
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+</head>
+<body>
 
-## astral plane.png
-![astral plane](https://github.com/joshua-bluestine/RecycleApp/blob/master/astral%20plane.png)
+<h1>Image Gallery</h1>
 
-## blaze fire.png
-![blaze fire](https://github.com/joshua-bluestine/RecycleApp/blob/master/blaze%20fire.png)
+<h2>astral plane.png</h2>
+<img src="https://github.com/joshua-bluestine/RecycleApp/blob/master/astral%20plane.png" alt="astral plane" />
 
-## forage.png
-![forage](https://github.com/joshua-bluestine/RecycleApp/blob/master/forage.png)
+<h2>blaze fire.png</h2>
+<img src="https://github.com/joshua-bluestine/RecycleApp/blob/master/blaze%20fire.png" alt="blaze fire" />
 
-## necromancy.png
-![necromancy](https://github.com/joshua-bluestine/RecycleApp/blob/master/necromancy.png)
+<h2>forage.png</h2>
+<img src="https://github.com/joshua-bluestine/RecycleApp/blob/master/forage.png" alt="forage" />
 
-## sonic boom.png
-![sonic boom](https://github.com/joshua-bluestine/RecycleApp/blob/master/sonic%20boom.png)
+<h2>necromancy.png</h2>
+<img src="https://github.com/joshua-bluestine/RecycleApp/blob/master/necromancy.png" alt="necromancy" />
 
-## tunnel.png
-![tunnel](https://github.com/joshua-bluestine/RecycleApp/blob/master/tunnel.png)
+<h2>sonic boom.png</h2>
+<img src="https://github.com/joshua-bluestine/RecycleApp/blob/master/sonic%20boom.png" alt="sonic boom" />
+
+<h2>tunnel.png</h2>
+<img src="https://github.com/joshua-bluestine/RecycleApp/blob/master/tunnel.png" alt="tunnel" />
+
+</body>
+</html>
