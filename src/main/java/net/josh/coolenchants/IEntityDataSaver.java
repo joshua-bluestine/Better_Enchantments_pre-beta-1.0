@@ -1,2 +1,7 @@
-package net.josh.coolenchants;public interface IEntityDataSaver {
+package net.josh.coolenchants;
+
+import net.minecraft.nbt.NbtCompound;
+
+public interface IEntityDataSaver {
+    NbtCompound getPersistentData();
 }

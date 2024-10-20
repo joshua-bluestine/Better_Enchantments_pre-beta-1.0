@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "coolenchants:block/cooled_lava_0"
+    "all": "coolenchants:block/cooled_lava_3"
   }
 }

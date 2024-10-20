@@ -11,7 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.util.Hand;
 
-public class DragonAtackGoal
+public class DragonAttackGoal
         extends Goal {
     protected final PathAwareEntity mob;
     private final double speed;
@@ -26,7 +26,7 @@ public class DragonAtackGoal
     private long lastUpdateTime;
     private static final long MAX_ATTACK_TIME = 20L;
 
-    public DragonAtackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
+    public DragonAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         this.mob = mob;
         this.speed = speed;
         this.pauseWhenMobIdle = pauseWhenMobIdle;

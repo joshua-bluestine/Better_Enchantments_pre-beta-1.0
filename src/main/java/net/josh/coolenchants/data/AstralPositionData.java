@@ -6,17 +6,16 @@ import net.minecraft.nbt.NbtCompound;
 
 import java.util.UUID;
 
-public class NecromancerOwnerData {
-    public static void setOwener(IEntityDataSaver entity, PlayerEntity player) {
+public class AstralPositionData {
+    public static void setY(IEntityDataSaver entity, int y) {
         NbtCompound nbt = entity.getPersistentData();
-        //PlayerEntity player = nbt.getUuid("owner");
-        nbt.putUuid("owner", player.getUuid());
+        nbt.putInt("astralpos", y);
     }
-    public static UUID getOwner(IEntityDataSaver entity){
+    public static int getY(IEntityDataSaver entity){
         NbtCompound nbt = entity.getPersistentData();
-        if (nbt.contains("owner")){
-            return nbt.getUuid("owner");
+        if (nbt.contains("astralpos")){
+            return nbt.getInt("astralpos");
         }
-        return null;
+        return 0;
     }
 }

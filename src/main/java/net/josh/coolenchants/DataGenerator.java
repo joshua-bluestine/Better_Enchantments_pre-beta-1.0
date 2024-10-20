@@ -8,7 +8,7 @@ import net.josh.coolenchants.world.dimension.ModDimensions;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 
-public class CoolEnchantsDataGenerator implements DataGeneratorEntrypoint {
+public class DataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();

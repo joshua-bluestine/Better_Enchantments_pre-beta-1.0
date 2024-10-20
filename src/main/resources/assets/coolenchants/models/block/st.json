@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/template_torch",
-  "variants": {
-    "": { "model": "coolenchants:block/see_through" }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "minecraft:block/air"
   }
 }

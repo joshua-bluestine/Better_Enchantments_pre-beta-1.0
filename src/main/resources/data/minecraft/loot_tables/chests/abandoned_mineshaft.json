@@ -311,6 +311,51 @@
         }
       ],
       "rolls": 3.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "coolenchants:excavate"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "coolenchants:hard_hat"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "coolenchants:light"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 2
+        }
+      ],
+      "rolls": 0.75
     }
   ],
   "random_sequence": "minecraft:chests/abandoned_mineshaft"

@@ -288,6 +288,25 @@
         }
       ],
       "rolls": 3.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "coolenchants:health_boost"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 10
+        }
+      ],
+      "rolls": 1
     }
   ],
   "random_sequence": "minecraft:chests/simple_dungeon"

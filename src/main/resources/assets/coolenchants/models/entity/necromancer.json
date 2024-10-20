@@ -1,0 +1,6 @@
+{
+  "parent": "entity",
+  "textures": {
+    "layer0": "minecraft:textures/entity/zombie/zombie.png"
+  }
+}

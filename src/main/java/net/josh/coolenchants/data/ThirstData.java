@@ -1,8 +1,27 @@
-package net.josh.coolenchants;
+package net.josh.coolenchants.data;
 
+import net.josh.coolenchants.IEntityDataSaver;
 import net.minecraft.nbt.NbtCompound;
 
 public class ThirstData {
+
+    public static int setAmount(IEntityDataSaver player, int amount) {
+        NbtCompound nbt = player.getPersistentData();
+        nbt.putInt("necro_amount", amount);
+        return amount;
+    }
+    public static int getAmount(IEntityDataSaver player) {
+        return player.getPersistentData().getInt("necro_amount");
+    }
+    public static int setDragonAmount(IEntityDataSaver player, int amount) {
+        NbtCompound nbt = player.getPersistentData();
+        nbt.putInt("necro_dragon_amount", amount);
+        return amount;
+    }
+    public static int getDragonAmount(IEntityDataSaver player) {
+        return player.getPersistentData().getInt("necro_dragon_amount");
+    }
+
     public static int addThirst(IEntityDataSaver player, int amount) {
         NbtCompound nbt = player.getPersistentData();
         int thirst = nbt.getInt("thirst");
@@ -13,8 +32,15 @@ public class ThirstData {
         }
 
         nbt.putInt("thirst", thirst);
-        // sync the data
         return thirst;
+    }
+    public static int setThirst(IEntityDataSaver player, int amount) {
+        NbtCompound nbt = player.getPersistentData();
+        nbt.putInt("thirst", amount);
+        return amount;
+    }
+    public static int getThirst(IEntityDataSaver player) {
+        return player.getPersistentData().getInt("thirst");
     }
 
     public static int removeThirst(IEntityDataSaver player, int amount) {

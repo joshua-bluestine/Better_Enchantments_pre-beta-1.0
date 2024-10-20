@@ -23,6 +23,9 @@ import java.util.ArrayList;
 
 @Mixin(VillagerEntity.class)
 public abstract class VillagerEntityMixin {
+/*
+persuade
+ */
     TradeOfferList offers2 = new TradeOfferList();
     int counter = 0;
     ArrayList<String> names = new ArrayList<String>();
@@ -78,7 +81,6 @@ public abstract class VillagerEntityMixin {
 
                 stack.setCount(discountedCount);
 
-                // Create a new TradeOffer with the modified stack
                 TradeOffer modifiedOffer = new TradeOffer(stack, offer.getSecondBuyItem(), offer.getSellItem(), offer.getMaxUses(), offer.getMerchantExperience(), offer.getPriceMultiplier());
                 offers.set(i, modifiedOffer);
             }

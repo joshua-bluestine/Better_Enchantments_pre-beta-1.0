@@ -42,7 +42,6 @@ public class InfinitePotionEnchantment extends Enchantment {
     }
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        //System.out.println("shit is working???");
         return stack.getItem() == Items.POTION ||
                 stack.getItem() == Items.SPLASH_POTION ||
                 stack.getItem() == Items.LINGERING_POTION;

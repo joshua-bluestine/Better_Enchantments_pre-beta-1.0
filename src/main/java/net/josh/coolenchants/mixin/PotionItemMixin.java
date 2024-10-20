@@ -56,19 +56,21 @@ public class PotionItemMixin {
         if (playerEntity != null) {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(johnson));
             if (!playerEntity.getAbilities().creativeMode) {
-                if (!ModUtils.isHoldingEnchantedWeapon(playerEntity, ModEnchantments.INFINITE_POTION)){
+                if (!ModUtils.isHoldingEnchantedWeaponInEitherHand(playerEntity, ModEnchantments.INFINITE_POTION)){
                     stack.decrement(1);
                 } else {
-                    playerEntity.getItemCooldownManager().set(johnson, 20);
+                    playerEntity.getItemCooldownManager().set(johnson, 30);
                 }
             }
         }
         if (playerEntity == null || !playerEntity.getAbilities().creativeMode) {
-            if (stack.isEmpty()) {
-                return new ItemStack(Items.GLASS_BOTTLE);
-            }
-            if (playerEntity != null) {
-                playerEntity.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
+            if (!ModUtils.isHoldingEnchantedWeaponInEitherHand(playerEntity, ModEnchantments.INFINITE_POTION)) {
+                if (stack.isEmpty()) {
+                    return new ItemStack(Items.GLASS_BOTTLE);
+                }
+                if (playerEntity != null) {
+                    playerEntity.getInventory().insertStack(new ItemStack(Items.GLASS_BOTTLE));
+                }
             }
         }
         user.emitGameEvent(GameEvent.DRINK);

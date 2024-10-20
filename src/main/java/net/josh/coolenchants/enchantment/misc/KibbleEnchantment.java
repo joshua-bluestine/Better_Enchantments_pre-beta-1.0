@@ -44,7 +44,6 @@ public class KibbleEnchantment extends Enchantment {
     }
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        //System.out.println("shit is working???");
         return stack.getItem() == Items.COOKED_BEEF ||
                 stack.getItem() == Items.COOKED_CHICKEN ||
                 stack.getItem() == Items.COOKED_COD ||

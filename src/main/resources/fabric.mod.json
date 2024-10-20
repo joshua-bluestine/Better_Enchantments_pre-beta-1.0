@@ -16,11 +16,15 @@
 	"entrypoints": {
 		"main": [
 			"net.josh.coolenchants.CoolEnchants"
-		],		"client": [
+		],
+		"client": [
 			"net.josh.coolenchants.CoolEnchantsClient"
 		],
 		"fabric-datagen": [
-			"net.josh.coolenchants.CoolEnchantsDataGenerator"
+			"net.josh.coolenchants.DataGenerator"
+		],
+		"datagen":[
+			"net.josh.coolenchants.DataGenerator"
 		]
 	},
 	"mixins": [

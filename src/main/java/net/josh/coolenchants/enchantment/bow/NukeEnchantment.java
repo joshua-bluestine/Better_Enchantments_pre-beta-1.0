@@ -53,12 +53,11 @@ public class NukeEnchantment extends Enchantment {
             ServerWorld world = (ServerWorld) user.getWorld();
             BlockPos position = target.getBlockPos();
             if (target instanceof LivingEntity && CoolEnchants.bowHit == 1) {
-                float explosionPower = 16f; // Adjust explosion power for level 3
+                float explosionPower = 16f;
                 float explosionRadius = 16f;
                 explosionPower *= EnchantmentHelper.getLevel(ModEnchantments.NUKE,user.getMainHandStack());
                 explosionRadius *= EnchantmentHelper.getLevel(ModEnchantments.NUKE,user.getMainHandStack());
 
-                // Adjust explosion radius for level 3
                 target.getWorld().createExplosion(null, target.getX(), target.getBodyY(0.125), target.getZ(), explosionRadius, false, World.ExplosionSourceType.TNT);
                 spawnCustomParticles(world, target.getX(), target.getY(), target.getZ(), explosionRadius);
                 CoolEnchants.bowHit = 0;
@@ -70,8 +69,7 @@ public class NukeEnchantment extends Enchantment {
 
 
     private void spawnCustomParticles(ServerWorld world, double x, double y, double z, float radius) {
-        // You can adjust these values to customize the particle effects
-        int particleCount = (int) (radius * 50); // Increase particle count based on explosion radius
+        int particleCount = (int) (radius * 50);
         for (int i = 0; i < particleCount; i++) {
             double offsetX = world.random.nextGaussian() * radius;
             double offsetY = world.random.nextGaussian() * radius;

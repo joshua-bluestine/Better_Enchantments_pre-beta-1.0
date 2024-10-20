@@ -1,8 +1,8 @@
-package com.telepathicgrunt.structure_tutorial.structures;
+package net.josh.coolenchants.structures;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.telepathicgrunt.structure_tutorial.STStructures;
+import net.josh.coolenchants.CEStructures;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.structure.pool.StructurePool;
 import net.minecraft.structure.pool.StructurePoolBasedGenerator;
@@ -38,7 +38,7 @@ public class SkyStructures extends Structure {
     private final Optional<Heightmap.Type> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
 
-    public SkyStructures(Structure.Config config,
+    public SkyStructures(Config config,
                          RegistryEntry<StructurePool> startPool,
                          Optional<Identifier> startJigsawName,
                          int size,
@@ -81,7 +81,7 @@ public class SkyStructures extends Structure {
      * Use the biome tags for where to spawn the structure and users can datapack
      * it to spawn in specific biomes that aren't in the dimension they don't like if they wish.
      */
-    private static boolean extraSpawningChecks(Structure.Context context) {
+    private static boolean extraSpawningChecks(Context context) {
         // Grabs the chunk position we are at
         ChunkPos chunkpos = context.chunkPos();
 
@@ -96,7 +96,7 @@ public class SkyStructures extends Structure {
     }
 
     @Override
-    public Optional<Structure.StructurePosition> getStructurePosition(Structure.Context context) {
+    public Optional<StructurePosition> getStructurePosition(Context context) {
 
         // Check if the spot is valid for our structure. This is just as another method for cleanness.
         // Returning an empty optional tells the game to skip this spot as it will not generate the structure.
@@ -140,6 +140,6 @@ public class SkyStructures extends Structure {
 
     @Override
     public StructureType<?> getType() {
-        return STStructures.SKY_STRUCTURES; // Helps the game know how to turn this structure back to json to save to chunks
+        return CEStructures.SKY_STRUCTURES; // Helps the game know how to turn this structure back to json to save to chunks
     }
 }

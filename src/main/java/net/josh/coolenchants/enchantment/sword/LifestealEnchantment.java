@@ -71,8 +71,7 @@ public class LifestealEnchantment extends Enchantment {
                         //user.getWorld().addParticle(ParticleTypes.HEART, target.getParticleX(1.0D), target.getY(), target.getParticleZ(1.0D), xv, 0, zv);
 
                     }
-                    for (int i = 0; i <= level; i++)
-                        user.setHealth((float) (user.getHealth()+(((LivingEntity) target).getMaxHealth()*.05)));
+                    user.heal(level);
                 }
             }
         }

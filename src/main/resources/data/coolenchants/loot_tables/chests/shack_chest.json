@@ -87,41 +87,33 @@
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:iron_horse_armor",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "minecraft:saddle",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:music_disc_cat",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 10.0
+                "max": 15.0,
+                "min": 7.0
               },
               "treasure": true
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.8
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:leather_helmet",
-          "weight": 2
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -130,14 +122,23 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 10.0
+                "max": 15.0,
+                "min": 7.0
               },
               "treasure": true
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.8
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:leather_chestplate",
-          "weight": 2
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -146,14 +147,23 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 10.0
+                "max": 15.0,
+                "min": 7.0
               },
               "treasure": true
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.8
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:leather_boots",
-          "weight": 2
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -178,7 +188,7 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
+                "max": 10.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
@@ -194,13 +204,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
+                "max": 10.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:torches",
+          "name": "minecraft:torch",
           "weight": 3
         },
         {
@@ -210,7 +220,7 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
+                "max": 10.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
@@ -223,6 +233,15 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
@@ -230,10 +249,19 @@
                 "min": 7.0
               },
               "treasure": true
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.8
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:leather_leggings",
-          "weight": 3
+          "weight": 1
         },
         {
           "type": "minecraft:item",
@@ -242,8 +270,8 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 10.0,
-                "min": 3.0
+                "max": 7.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
@@ -258,7 +286,7 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 15.0,
+                "max": 7.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
@@ -290,7 +318,7 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 15.0,
+                "max": 10.0,
                 "min": 6.0
               },
               "function": "minecraft:set_count"
@@ -309,19 +337,6 @@
     {
       "bonus_rolls": 0.0,
       "entries": [
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "enchantments": [
-                "coolenchants:chop"
-              ],
-              "function": "minecraft:enchant_randomly"
-            }
-          ],
-          "name": "minecraft:book",
-          "weight": 2
-        },
         {
           "type": "minecraft:item",
           "functions": [

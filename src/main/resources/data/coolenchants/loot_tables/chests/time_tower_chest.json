@@ -11,36 +11,6 @@
               "add": false,
               "count": 1.0,
               "function": "minecraft:set_count"
-            },
-            {
-              "add": false,
-              "damage": {
-                "type": "minecraft:uniform",
-                "max": 1.0,
-                "min": 0.8
-              },
-              "function": "minecraft:set_damage"
-            },
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "max": 17.0,
-                "min": 10.0
-              },
-              "treasure": true
-            }
-          ],
-          "name": "minecraft:stone_sword",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
             }
           ],
           "name": "minecraft:lead",
@@ -53,10 +23,19 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 10.0
+                "max": 15.0,
+                "min": 7.0
               },
               "treasure": true
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 0.8
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:leather_helmet",
@@ -69,10 +48,19 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 10.0
+                "max": 15.0,
+                "min": 7.0
               },
               "treasure": true
+            },
+            {
+              "add": false,
+              "damage": {
+                "type": "minecraft:uniform",
+                "max": 1.0,
+                "min": 0.8
+              },
+              "function": "minecraft:set_damage"
             }
           ],
           "name": "minecraft:leather_chestplate",
@@ -82,26 +70,10 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "max": 20.0,
-                "min": 10.0
-              },
-              "treasure": true
-            }
-          ],
-          "name": "minecraft:leather_boots",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 30.0,
+                "max": 20.0,
                 "min": 4.0
               },
               "function": "minecraft:set_count"
@@ -117,14 +89,14 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
+                "max": 15.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
           "name": "minecraft:paper",
-          "weight": 3
+          "weight": 4
         },
         {
           "type": "minecraft:item",
@@ -133,13 +105,13 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 20.0,
+                "max": 10.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:torches",
+          "name": "minecraft:torch",
           "weight": 3
         },
         {
@@ -156,22 +128,6 @@
             }
           ],
           "name": "minecraft:bookshelf",
-          "weight": 3
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "type": "minecraft:uniform",
-                "max": 12.0,
-                "min": 7.0
-              },
-              "treasure": true
-            }
-          ],
-          "name": "minecraft:leather_leggings",
           "weight": 3
         },
         {
@@ -214,14 +170,14 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 15.0,
-                "min": 6.0
+                "max": 8.0,
+                "min": 1.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "minecraft:gold",
-          "weight": 7
+          "name": "minecraft:gold_ingot",
+          "weight": 4
         }
       ],
       "rolls": {

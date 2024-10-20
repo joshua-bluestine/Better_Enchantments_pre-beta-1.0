@@ -53,12 +53,10 @@ public class WitherEnchantment extends Enchantment {
                 ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 1));
             } else if (level == 2) {
                 ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 5));
-                // Create a 5x5 box around the target
                 BlockPos targetPos = target.getBlockPos();
                 Box area = new Box(targetPos.add(-2, -2, -2), targetPos.add(2, 2, 2));
                 List<LivingEntity> entities = ((ServerWorld) user.getWorld()).getEntitiesByClass(LivingEntity.class, area, e -> e != target);
 
-                // Apply poison effect to all entities in the 5x5 area
                 for (LivingEntity entity : entities) {
                     if (!(entity instanceof PlayerEntity))
                         entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 5));
@@ -66,13 +64,11 @@ public class WitherEnchantment extends Enchantment {
             } else if (level == 3) {
                 ((LivingEntity) target).addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 10));
 
-                // Create a 5x5 box around the target
                 BlockPos targetPos = target.getBlockPos();
                 Box area = new Box(targetPos.add(-4, -4, -4), targetPos.add(4, 4, 4));
 
                 List<LivingEntity> entities = ((ServerWorld) user.getWorld()).getEntitiesByClass(LivingEntity.class, area, e -> e != target);
 
-                // Apply poison effect to all entities in the 5x5 area
                 for (LivingEntity entity : entities) {
                     if (!(entity instanceof PlayerEntity))
                         entity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 200, 10));
