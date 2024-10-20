@@ -22,7 +22,7 @@
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/necromancy.png" alt="necromancy" />
 
 <h2>Sonic Boom</h2>
-<h3>Shoots a sonic boom like the warden (on a MASSIVE cooldown teehee)</h3>
+<h3>Shoots a sonic boom like the warden (on a MASSIVE cooldown)</h3>
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/sonic%20boom.png" alt="sonic boom" />
 
 <h2>Tunnel</h2>
