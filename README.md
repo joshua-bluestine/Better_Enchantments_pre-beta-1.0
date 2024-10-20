@@ -6,7 +6,7 @@
 <h1>Some of My Favorite Enchantments:</h1>
 
 <h2>Astral Plane</h2>
-<h3>Teleports you to the astral plane dimension, where every block counts for 32 in the overworld</h3>
+<h3>Teleports you to the astral plane dimension, where every block counts for 16 in the overworld</h3>
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/astral%20plane.png" alt="astral plane" />
 
 <h2>Blaze Fire</h2>
