@@ -6,7 +6,7 @@
 <h1>Some of My Favorite Enchantments:</h1>
 
 <h2>Astral Plane</h2>
-<h3>Teleports you to the astral plane dimension, where every block counts for 32 in the overworld</h3>
+<h3>Teleports you to the astral plane dimension, where every block counts for 16 in the overworld</h3>
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/astral%20plane.png" alt="astral plane" />
 
 <h2>Blaze Fire</h2>
@@ -22,7 +22,7 @@
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/necromancy.png" alt="necromancy" />
 
 <h2>Sonic Boom</h2>
-<h3>Shoots a sonic boom like the warden (on a MASSIVE cooldown teehee)</h3>
+<h3>Shoots a sonic boom like the warden (on a MASSIVE cooldown)</h3>
 <img src="https://github.com/joshua-bluestine/Better_Enchantments_pre-beta-1.0/blob/master/pictures/sonic%20boom.png" alt="sonic boom" />
 
 <h2>Tunnel</h2>
