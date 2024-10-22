@@ -17,8 +17,10 @@ public class LightningEffect extends StatusEffect {
 
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity instanceof LivingEntity) {
-            EntityType.LIGHTNING_BOLT.spawn((ServerWorld) entity.getWorld(), entity.getBlockPos(), SpawnReason.TRIGGERED);
+        if (entity != null) {
+            if (entity.getWorld() instanceof ServerWorld) {
+                EntityType.LIGHTNING_BOLT.spawn((ServerWorld) entity.getWorld(), entity.getBlockPos(), SpawnReason.TRIGGERED);
+            }
         }
     }
 

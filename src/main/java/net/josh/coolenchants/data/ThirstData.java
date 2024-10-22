@@ -13,14 +13,6 @@ public class ThirstData {
     public static int getAmount(IEntityDataSaver player) {
         return player.getPersistentData().getInt("necro_amount");
     }
-    public static int setDragonAmount(IEntityDataSaver player, int amount) {
-        NbtCompound nbt = player.getPersistentData();
-        nbt.putInt("necro_dragon_amount", amount);
-        return amount;
-    }
-    public static int getDragonAmount(IEntityDataSaver player) {
-        return player.getPersistentData().getInt("necro_dragon_amount");
-    }
 
     public static int addThirst(IEntityDataSaver player, int amount) {
         NbtCompound nbt = player.getPersistentData();

@@ -30,7 +30,7 @@ public class FreezesMobsEnchantment extends Enchantment {
         return true;
     }
     @Override
-    public int getMaxLevel(){return 2;}
+    public int getMaxLevel(){return 3;}
 
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level){
@@ -46,6 +46,9 @@ public class FreezesMobsEnchantment extends Enchantment {
                 }
                 if (level == 2) {
                     ((LivingEntity) target).setStatusEffect(new StatusEffectInstance(ModEffects.TIME_FREEZE_EFFECT, 20, 10, true, false), null);
+                }
+                if (level == 3){
+                    ((LivingEntity) target).setStatusEffect(new StatusEffectInstance(ModEffects.TIME_FREEZE_EFFECT, 30, 10, true, false), null);
                 }
             }
         }

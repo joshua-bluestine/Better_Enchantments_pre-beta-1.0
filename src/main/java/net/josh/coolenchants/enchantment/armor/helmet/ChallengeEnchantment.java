@@ -24,9 +24,6 @@ public class ChallengeEnchantment extends Enchantment {
         return true;
     }
     @Override
-    public int getMaxLevel(){return 3;}
-
-    @Override
     public boolean isAvailableForEnchantedBookOffer() {
         return false;
     }

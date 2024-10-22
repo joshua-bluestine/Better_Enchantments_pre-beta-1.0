@@ -25,6 +25,8 @@
     "VillagerEntityMixin",
     "WolfMixin",
     "LocalDifficultyMixin",
+    "EndermanEntityMixin",
+    "MobEntityMixin",
     "PlayerEntityMixin"
   ],
   "injectors": {

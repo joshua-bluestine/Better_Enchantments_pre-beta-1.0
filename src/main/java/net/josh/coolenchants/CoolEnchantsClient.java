@@ -13,7 +13,6 @@ import net.josh.coolenchants.entity.ModEntities;
 //import net.josh.coolenchants.entity.client.NecromancerModel;
 import net.josh.coolenchants.entity.client.NecromancerRenderer;
 import net.josh.coolenchants.client.ChronoSaveHudOverlay;
-import net.josh.coolenchants.entity.client.UndeadDragonRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.mob.MobEntity;
@@ -29,7 +28,6 @@ public class CoolEnchantsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         EntityRendererRegistry.register(ModEntities.NECROMANCER, NecromancerRenderer::new);
-        EntityRendererRegistry.register(ModEntities.UNDEAD_DRAGON, UndeadDragonRenderer::new);
 
         ClientPlayNetworking.registerGlobalReceiver(CoolEnchants.S2C_PLAY_EFFECTS_PACKET_ID,
                 (client, handler, buf, responseSender) -> {

@@ -22,7 +22,6 @@ import net.josh.coolenchants.effect.ModEffects;
 import net.josh.coolenchants.enchantment.ModEnchantments;
 import net.josh.coolenchants.entity.ModEntities;
 import net.josh.coolenchants.entity.custom.NecromancerEntity;
-import net.josh.coolenchants.entity.custom.UndeadDragonEntity;
 import net.josh.coolenchants.event.*;
 //import net.josh.coolenchants.event.PlayerTickHandler;
 import net.josh.coolenchants.item.ModItemGroups;
@@ -97,7 +96,6 @@ public class CoolEnchants implements ModInitializer {
 		ModBlocks.registerBlocks();
 		ModEntities.registerEntities();
 		FabricDefaultAttributeRegistry.register(ModEntities.NECROMANCER, NecromancerEntity.createIronGolemAttributes());
-		FabricDefaultAttributeRegistry.register(ModEntities.UNDEAD_DRAGON, UndeadDragonEntity.createIronGolemAttributes());
 
 //......................DISCONTINUED SHIT...................
 		ModItems.registerItems();

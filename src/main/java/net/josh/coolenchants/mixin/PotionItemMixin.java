@@ -59,7 +59,7 @@ public class PotionItemMixin {
                 if (!ModUtils.isHoldingEnchantedWeaponInEitherHand(playerEntity, ModEnchantments.INFINITE_POTION)){
                     stack.decrement(1);
                 } else {
-                    playerEntity.getItemCooldownManager().set(johnson, 30);
+                    playerEntity.getItemCooldownManager().set(johnson, 45);
                 }
             }
         }

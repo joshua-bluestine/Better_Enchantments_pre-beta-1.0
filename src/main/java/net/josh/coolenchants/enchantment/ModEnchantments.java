@@ -1,10 +1,10 @@
 package net.josh.coolenchants.enchantment;
 
 import net.josh.coolenchants.CoolEnchants;
+import net.josh.coolenchants.enchantment.armor.boots.LaunchEnchantment;
 import net.josh.coolenchants.enchantment.armor.boots.LavaWalkerEnchantment;
 import net.josh.coolenchants.enchantment.armor.boots.SpeedBootsEnchantment;
 import net.josh.coolenchants.enchantment.armor.helmet.ScouterEnchantment;
-import net.josh.coolenchants.enchantment.armor.helmet.necromancy.NecroDragonEnchantment;
 import net.josh.coolenchants.enchantment.armor.helmet.necromancy.NecromancyEnchantment;
 import net.josh.coolenchants.enchantment.bow.*;
 import net.josh.coolenchants.enchantment.sword.*;
@@ -116,6 +116,13 @@ public class ModEnchantments {
                     Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.ARMOR_FEET,
                     EquipmentSlot.FEET));
+    public static Enchantment LAUNCH = register(
+            "launch",
+            new LaunchEnchantment(
+                    Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.ARMOR_FEET,
+                    EquipmentSlot.FEET));
+
     public static Enchantment LAVA_WALKER = register(
             "lava_walker",
             new LavaWalkerEnchantment(
@@ -337,6 +344,12 @@ public static Enchantment SCYTHE = register(
                     Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.ARMOR_HEAD,
                     EquipmentSlot.HEAD));
+        public static Enchantment AVERT = register(
+            "avert",
+            new net.josh.coolenchants.enchantment.armor.helmet.AvertEnchantment(
+                    Enchantment.Rarity.UNCOMMON,
+                    EnchantmentTarget.ARMOR_HEAD,
+                    EquipmentSlot.HEAD));
         public static Enchantment CHALLENGE = register(
             "challenge",
             new net.josh.coolenchants.enchantment.armor.helmet.ChallengeEnchantment(
@@ -419,17 +432,9 @@ public static Enchantment SCYTHE = register(
                     Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.ARMOR_HEAD,
                     EquipmentSlot.HEAD));
-
-
     public static Enchantment NECROMANCY = register(
             "necromancy",
             new NecromancyEnchantment(
-                    Enchantment.Rarity.UNCOMMON,
-                    EnchantmentTarget.ARMOR_HEAD,
-                    EquipmentSlot.HEAD));
-    public static Enchantment NECRO_DRAGON = register(
-            "necro_dragon",
-            new NecroDragonEnchantment(
                     Enchantment.Rarity.UNCOMMON,
                     EnchantmentTarget.ARMOR_HEAD,
                     EquipmentSlot.HEAD));

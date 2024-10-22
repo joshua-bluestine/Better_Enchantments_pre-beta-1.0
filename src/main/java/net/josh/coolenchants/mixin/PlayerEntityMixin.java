@@ -9,11 +9,9 @@ import net.josh.coolenchants.ModUtils;
 import net.josh.coolenchants.data.*;
 import net.josh.coolenchants.enchantment.ModEnchantments;
 import net.josh.coolenchants.enchantment.armor.boots.doublejump.ModParticleEffects;
-import net.josh.coolenchants.enchantment.armor.helmet.necromancy.NecroDragonEnchantment;
 import net.josh.coolenchants.enchantment.sword.LifestealEnchantment;
 import net.josh.coolenchants.entity.ModEntities;
 import net.josh.coolenchants.entity.custom.NecromancerEntity;
-import net.josh.coolenchants.entity.custom.UndeadDragonEntity;
 import net.josh.coolenchants.world.dimension.ModDimensions;
 import net.kyrptonaught.customportalapi.CustomPortalsMod;
 import net.kyrptonaught.customportalapi.interfaces.CustomTeleportingEntity;
@@ -119,6 +117,7 @@ OH MY LORD IT RAN SO MUCH BETTER
     boolean crush = false;
     boolean jumpBoost = false; // second part is in ClientPlayerEntityMixin
     boolean gravity = false;
+    boolean gravityFirstTime = false;
     boolean barrage = false; // part two, first part is in BowItemMixin
     boolean witherImmune = false;
     boolean regen = false;
@@ -141,9 +140,10 @@ OH MY LORD IT RAN SO MUCH BETTER
     private static Position chronoPos;
     private static boolean chronoTrigger = false;
 
+    private static boolean guardianLaser = false;
+    private static int laserTicks = 0;
+
     private static boolean necromancer = false;
-    private static boolean necroDragon = false;
-    private static int necroDragonLevel = 0;
     private static int necroLevel = 0;
 
     private static boolean wardenShooter = false;
@@ -154,6 +154,9 @@ OH MY LORD IT RAN SO MUCH BETTER
     private int regenDelay = 0;
     float falling = 0;
     int shooterCooldown = 0;
+    double launchCounter = 0;
+    int launchLevel = 0;
+    boolean launch = false;
     private double height = 100000;
     private boolean dissociated = false;
     private boolean dissociatedProject1 = false;
@@ -186,6 +189,12 @@ OH MY LORD IT RAN SO MUCH BETTER
                 cir.setReturnValue(false);
             }
         }
+//..........................DEFLECT PT 1......................
+        if (source.isOf(DamageTypes.ARROW)) {
+            if (ModUtils.deflect2) {
+                cir.setReturnValue(false);
+            }
+        }
     }
 
 
@@ -193,6 +202,7 @@ OH MY LORD IT RAN SO MUCH BETTER
     private void tick(CallbackInfo info) {
         PlayerEntity player = (PlayerEntity) (Object) this;
         World world2 = player.getWorld();
+
         if (!player.getWorld().isClient()) {
             if (shooterCooldown > 0) {
                 shooterCooldown--;
@@ -202,27 +212,27 @@ OH MY LORD IT RAN SO MUCH BETTER
             if (ticker > 100) {
                 astralProject = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.ASTRAL_PROJECT);
                 astralTeleport = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.ASTRAL_TELEPORT);
+                ModUtils.launch = ModUtils.isWearingEnchantedBoots(player, ModEnchantments.LAUNCH);
+                launchLevel = EnchantmentHelper.getLevel(ModEnchantments.LAUNCH, player.getEquippedStack(EquipmentSlot.FEET));
                 ModUtils.chronoPause = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.CHRONO_PAUSE);
                 ModUtils.chronoSave = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.CHRONOMANCY);
                 necromancer = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.NECROMANCY);
                 necroLevel = EnchantmentHelper.getLevel(ModEnchantments.NECROMANCY, player.getEquippedStack(EquipmentSlot.HEAD));
-                necroDragon = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.NECRO_DRAGON);
-                necroDragonLevel = EnchantmentHelper.getLevel(ModEnchantments.NECRO_DRAGON, player.getEquippedStack(EquipmentSlot.HEAD));
 
                 ModUtils.challenge = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.CHALLENGE);
+                ModUtils.challengeLevel = EnchantmentHelper.getLevel(ModEnchantments.CHALLENGE, player.getEquippedStack(EquipmentSlot.HEAD)) ;
 
                 ModUtils.untouchable = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.UNTOUCHABLE);
                 crush = ModUtils.isWearingEnchantedBoots(player, ModEnchantments.CRUSH);
                 speedBoost = ModUtils.isWearingEnchantedBoots(player, ModEnchantments.SPEED_BOOST);
                 jumpBoost = ModUtils.isWearingEnchantedBoots(player, ModEnchantments.JUMP_BOOST); // second part is in ClientPlayerEntityMixin
-                gravity = ModUtils.isWearingEnchantedBoots(player, ModEnchantments.GRAVITY);
+                ModUtils.gravity = ModUtils.isWearingEnchantedBoots(player, ModEnchantments.GRAVITY);
                 witherImmune = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.WITHER_IMMUNE);
                 regen = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.REGEN);
                 photosynthesis = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.PHOTO);
                 timeChange = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.TIME_CHANGE);
                 astralPlane = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.ASTRAL_PLANE);
                 ModUtils.astralDimension = (player.getWorld().getRegistryKey() == ModDimensions.ASTRAL_PLANE_LEVEL_KEY);
-                System.out.println(astralDimension);
                 ModUtils.deflect = ModUtils.isWearingEnchantedArmor(player, ModEnchantments.DEFLECT);
                 ModUtils.astralBlink = ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.ASTRAL_BLINK);
                 astralBlink = ModUtils.astralBlink;
@@ -231,19 +241,13 @@ OH MY LORD IT RAN SO MUCH BETTER
                 dissociatedProject1 = (ModUtils.isWearingEnchantedHelmet(player, ModEnchantments.ASTRAL_PROJECT) && player.getMainHandStack().isEmpty());
 
                 ticker = 0;
-                if (!necromancer && !necroDragon) {
+                if (!necromancer) {
                     ThirstData.setThirst(((IEntityDataSaver) player), 0);
                     ThirstData.setAmount(((IEntityDataSaver) player), 0);
-                    ThirstData.setDragonAmount(((IEntityDataSaver) player), 0);
                 }
                 if (necromancer) {
                     ThirstData.setAmount(((IEntityDataSaver) player), necroLevel);
                 }
-                if (necroDragon) {
-                    ThirstData.setDragonAmount(((IEntityDataSaver) player), necroDragonLevel);
-                }
-
-
             }
             if (ticker2 > 10) {
                 ModUtils.timeFreeze = ModUtils.isHoldingEnchantedWeapon(player, ModEnchantments.FREEZE);
@@ -415,7 +419,7 @@ OH MY LORD IT RAN SO MUCH BETTER
                                 if (ModUtils.untouchableCooldown == 0) {
                                     ModUtils.untouchable2 = true;
                                     ModUtils.untouchableCounter = 100;
-                                    ModUtils.untouchableCooldown = 400;
+                                    ModUtils.untouchableCooldown = 500;
                                 }
                             }
                         }
@@ -508,20 +512,9 @@ OH MY LORD IT RAN SO MUCH BETTER
 
                     }
                 }
-//...........................NECRO DRAGON...............................
-                if (necroDragon) {
-                    if (((IEntityDataSaver) player).getPersistentData().getInt("thirst")
-                            < EnchantmentHelper.getLevel(ModEnchantments.NECRO_DRAGON, player.getEquippedStack(EquipmentSlot.HEAD))) {
-                        UndeadDragonEntity greg = new UndeadDragonEntity(ModEntities.UNDEAD_DRAGON, world2);
-                        greg.setPos(player.getX(), player.getY(), player.getZ());
-                        NecromancerOwnerData.setOwener((IEntityDataSaver) greg, player);
-                        world2.spawnEntity(greg);
-
-                        ThirstData.addThirst(((IEntityDataSaver) player), 1);
-                    }
-                }
             }
         }
+
 //...............................ASTRAL PLANE.......................
         if (ModUtils.astralPlane) {
             if (!ModUtils.astralDimension) {
@@ -553,7 +546,6 @@ OH MY LORD IT RAN SO MUCH BETTER
                     //ACTUAL TELEPORTER METHOD
                     ModUtils.safeTeleport(serverWorld, portalPos, player);
 
-
                     //Makes particles after teleport so you see it
                     for (int i = 1; i < 40; ++i) {
                         serverWorld.spawnParticles(ParticleTypes.GLOW,
@@ -578,10 +570,8 @@ OH MY LORD IT RAN SO MUCH BETTER
                     Vec3d currentPosition = player.getPos();
                     ModUtils.astralY = AstralPositionData.getY((IEntityDataSaver) player);
 
-
                     Vec3d astralPosition = new Vec3d(currentPosition.x, ModUtils.astralY, currentPosition.z);
                     BlockPos portalPos = new BlockPos((int) astralPosition.x, ModUtils.astralY, (int) astralPosition.z);
-                    System.out.println("2: " + ModUtils.astralY);
 
                     for (int i = 1; i < 40; ++i) {
                         serverWorld.spawnParticles(ParticleTypes.GLOW,
@@ -596,18 +586,6 @@ OH MY LORD IT RAN SO MUCH BETTER
                     }
 
                     ModUtils.safeTeleport(serverWorld, portalPos, player);
-                    if (player.getWorld().getBlockState(player.getBlockPos().down()).isAir()){
-                        for (int i = 1; i < 100; i++){
-                            if (!player.getWorld().getBlockState(player.getBlockPos().down(i)).isAir()){
-                                player.teleport(player.getX(), player.getBlockPos().down(i).up().getY(), player.getZ());
-                                break;
-                            }
-                            if (!player.getWorld().getBlockState(player.getBlockPos().up(i)).isAir()){
-                                player.teleport(player.getX(), player.getBlockPos().up(i).up().getY(), player.getZ());
-                                break;
-                            }
-                        }
-                    }
 
                     for (int i = 1; i < 40; ++i) {
                         serverWorld.spawnParticles(ParticleTypes.GLOW,
@@ -681,7 +659,6 @@ OH MY LORD IT RAN SO MUCH BETTER
                 if (SpleefData.getSpleef((IEntityDataSaver) player) != null) {
                     spleefCounter++;
                     if (spleefCounter > 50) {
-                        System.out.println(SpleefData.getSpleef((IEntityDataSaver) player));
 
                         List<BlockState> states = SpleefData.getBlockStateList((IEntityDataSaver) player, player);
                         spleefCounter = 0;
@@ -689,7 +666,6 @@ OH MY LORD IT RAN SO MUCH BETTER
                              pos.getY() > SpleefData.getSpleef((IEntityDataSaver) player).getY() - 50;
                              pos = pos.down()) {
                             if (pos.getY() == SpleefData.getSpleef((IEntityDataSaver) player).getY()) {
-                                System.out.println("test05");
                                 spleefCounter = 0;
                             }
                             player.getWorld().setBlockState(pos, states.get(spleefCounter));
@@ -806,7 +782,7 @@ OH MY LORD IT RAN SO MUCH BETTER
                     for (int i = 1; i < 3; ++i) {
                         ((ServerWorld) player.getWorld()).spawnParticles(ParticleTypes.CLOUD,
                                 player.getParticleX(2.0D),
-                                player.getY()+player.getWorld().random.nextDouble()*2,
+                                player.getY() + player.getWorld().random.nextDouble() * 2,
                                 player.getParticleZ(2.0D),
                                 1,
                                 random.nextGaussian() * 0.2D,
@@ -911,12 +887,8 @@ OH MY LORD IT RAN SO MUCH BETTER
                     }
                     chronoTrigger = false;
                     ModUtils.chronoTicker = 0;
-
                 }
-
             }
-
-
 //............................CRUSH.....................................
 
             if (crush) {
@@ -929,7 +901,7 @@ OH MY LORD IT RAN SO MUCH BETTER
 
                 if (player.fallDistance > 1) {
                     for (LivingEntity entity : entities) {
-                        if (!(entity instanceof PlayerEntity) && !(entity instanceof WolfEntity)) {
+                        if (!(entity instanceof PlayerEntity) && !(entity instanceof TameableEntity)) {
                             if (!ename.contains(entity.getId())) {
                                 ename.add(entity.getId());
                                 entity.damage(entity.getDamageSources().magic(), player.fallDistance * ((float) clevel) / 2);
@@ -954,7 +926,6 @@ OH MY LORD IT RAN SO MUCH BETTER
 
                 if (clevel > 1 && falling == 0) {
                     for (int ii = 0; ii < ename.size(); ii++) {
-
                         ModParticleEffects.play(player, (LivingEntity) player.getWorld().getEntityById(ename.get(ii)), SoundEvents.BLOCK_ANVIL_FALL, ParticleTypes.CRIT, 10, 2, 20, 20, 20);
                     }
                 }
@@ -973,8 +944,6 @@ OH MY LORD IT RAN SO MUCH BETTER
                     0);
         }
 
-
-
 //............................JUMP BOOST............................
         if (jumpBoost) {
             int jumplevel = EnchantmentHelper.getLevel(ModEnchantments.JUMP_BOOST, player.getEquippedStack(EquipmentSlot.FEET));
@@ -991,155 +960,164 @@ OH MY LORD IT RAN SO MUCH BETTER
                 player.setStatusEffect(blart, null);
             }
         }
-//........................GRAVITY.................................
-        if (gravity) {
+//..........................LAUNCH.................................
+        if (ModUtils.launch) {
+            if (!player.getWorld().isClient()) {
+                if (MinecraftClient.getInstance().options.sneakKey.isPressed()) {
+                    if (ModUtils.launchCounter < launchLevel * 5 && !ModUtils.launching && !MinecraftClient.getInstance().options.jumpKey.isPressed()) {
+                        ModUtils.launchCounter++;
+                    }
+                    if (MinecraftClient.getInstance().options.jumpKey.isPressed() && !ModUtils.launching) {
+                        ModUtils.launching = true;
+                        ModUtils.launchSpeed = ModUtils.launchCounter / 10.0D;
+                        ModUtils.print(player, ModUtils.launchSpeed);
+                        ModUtils.launchCounter = 0;
+                    }
+                } else {
+                    ModUtils.launchCounter = 0;
+                }
+            }
+            if (ModUtils.launching && player.getWorld().isClient()) {
+                Vec3d vec3d = new Vec3d(0, ModUtils.launchSpeed, 0);
+                player.setVelocity(player.getVelocity().add(vec3d));
+                ModParticleEffects.play(player,
+                        SoundEvents.ENTITY_RABBIT_JUMP,
+                        ParticleTypes.CLOUD,
+                        5,
+                        0,
+                        random.nextGaussian() * 0.02D,
+                        random.nextGaussian() * 0.02D,
+                        random.nextGaussian() * 0.02D);
+                ModUtils.launchCounter = 0;
+                ModUtils.launchSpeed = 0;
+            }
+            if (!MinecraftClient.getInstance().options.jumpKey.isPressed() && ModUtils.launching) {
+                ModUtils.launching = false;
+            }
+        }
+//.........................GRAVITY.................................
+
+        if (ModUtils.gravity) {
             if (!player.getWorld().isClient()) {
                 ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
                 if (serverPlayer.getWorld().getBlockState(serverPlayer.getBlockPos().down()).isAir() &&
                         serverPlayer.getWorld().getBlockState(serverPlayer.getBlockPos().down().down()).isAir()) {
-                    floating = true;
+                    ModUtils.floating = true;
                     if (!MinecraftClient.getInstance().options.sneakKey.isPressed()) {
                         if (height == 100000) {
                             height = serverPlayer.getY();
                         } else {
-
-                                serverPlayer.setNoGravity(true);
-                                //player.setPos(player.getX(), height, player.getZ());
-                                serverPlayer.setVelocity(player.getVelocity().x, 0, player.getVelocity().z);
-                                //serverPlayer.addVelocity(0, -player.getVelocity().y, 0);
-                                //System.out.println(player.getVelocity().y);
-                                if (serverPlayer.getVelocity().y != 0) {
-                                    //serverPlayer.addVelocity(0, -serverPlayer.getVelocity().y, 0);
-                                    serverPlayer.requestTeleport(serverPlayer.getX(), height, serverPlayer.getZ());
-                                }
-
-                                //player.setPosition(player.getX(), height, player.getZ());
-
-                                serverPlayer.getServerWorld().spawnParticles(ParticleTypes.SOUL_FIRE_FLAME,
-                                        player.getParticleX(1.0D),
-                                        player.getY(),
-                                        player.getParticleZ(1.0D),
-                                        1,
-                                        random.nextGaussian() * 0.2D,
-                                        random.nextGaussian() * 0.2D,
-                                        random.nextGaussian() * 0.2D,
-                                        0.0);
-
-
-                                serverPlayer.fallDistance = 0;
-
+                            serverPlayer.getServerWorld().spawnParticles(ParticleTypes.SOUL_FIRE_FLAME,
+                                    player.getParticleX(1.0D),
+                                    player.getY(),
+                                    player.getParticleZ(1.0D),
+                                    1,
+                                    random.nextGaussian() * 0.2D,
+                                    random.nextGaussian() * 0.2D,
+                                    random.nextGaussian() * 0.2D,
+                                    0.0);
+                            serverPlayer.fallDistance = 0;
                         }
-                    } else {
-                        player.setNoGravity(false);
                     }
                 } else {
-                    player.setNoGravity(false);
-                    floating = false;
+                    ModUtils.floating = false;
                     height = 100000;
+                }
+            } else {
+                if (ModUtils.floating && !MinecraftClient.getInstance().options.sneakKey.isPressed()){
+                    player.setVelocity(player.getVelocity().x, 0, player.getVelocity().z);
                 }
             }
         }
 //.........................ASTRAL BLINK, ASTRAL PROJECT && ASTRAL TELEPORT...............................
-        if (!world.isClient()){
-        if (astralBlinkCooldown > 0) {
-            astralBlinkCooldown--;
-        }
+        if (!world.isClient()) {
+            if (astralBlinkCooldown > 0) {
+                astralBlinkCooldown--;
+            }
 
-
-
-        if (astralTeleport) {
-            if (player.getMainHandStack().isEmpty()) {
-                dissociated = true;
-                if (player.getWorld().getBlockState(player.getBlockPos().down()).isAir() &&
-                        player.getWorld().getBlockState(player.getBlockPos().down().down()).isAir()) {
-                    floating = true;
-                } else {
-                    floating = false;
-                }
-                if (MinecraftClient.getInstance().options.sneakKey.isPressed() && !floating) {
-                    //player.sendMessage(Text.literal("uhhh"));
-                    target -= 0.2f;
-                } else if (MinecraftClient.getInstance().options.sprintKey.isPressed()) {
-                    target += 0.2f;
-                }
-
-                if (MinecraftClient.getInstance().mouse.wasRightButtonClicked() && astral == 0 && target != 1.62f) {
-                    astral = 1;
-
-                    BlockPos pos = new BlockPos((int) player.getX(), (int) (target - 1.62f + player.getY()), (int) player.getZ());
-                    scroll = target;
-                    if (player.getWorld().getBlockState(pos).isSolidBlock(player.getWorld(), pos) &&
-                            !player.getWorld().getBlockState(pos.up()).isSolidBlock(player.getWorld(), pos.up())) {
-
-                        ModParticleEffects.play(player,
-                                null,
-                                ParticleTypes.GLOW,
-                                40,
-                                1,
-                                20,
-                                20,
-                                20);
-
-                        player.setPos(player.getX(), target - 1.62f + player.getY() + 1, player.getZ());
-                        ModParticleEffects.play(player,
-                                null,
-                                ParticleTypes.GLOW,
-                                40,
-                                1,
-                                20,
-                                20,
-                                20);
+            if (astralTeleport) {
+                if (player.getMainHandStack().isEmpty()) {
+                    dissociated = true;
+                    if (player.getWorld().getBlockState(player.getBlockPos().down()).isAir() &&
+                            player.getWorld().getBlockState(player.getBlockPos().down().down()).isAir()) {
+                        floating = true;
                     } else {
-
-                        ModParticleEffects.play(player,
-                                null,
-                                ParticleTypes.GLOW,
-                                40,
-                                1,
-                                20,
-                                20,
-                                20);
-                        player.setPos(player.getX(), target - 1.62f + player.getY(), player.getZ());
-                        ModParticleEffects.play(player,
-                                null,
-                                ParticleTypes.GLOW,
-                                40,
-                                1,
-                                20,
-                                20,
-                                20);
+                        floating = false;
+                    }
+                    if (MinecraftClient.getInstance().options.sneakKey.isPressed() && !floating) {
+                        //player.sendMessage(Text.literal("uhhh"));
+                        target -= 0.2f;
+                    } else if (MinecraftClient.getInstance().options.sprintKey.isPressed()) {
+                        target += 0.2f;
                     }
 
-
-                    scroll = 1.62f;
+                    if (MinecraftClient.getInstance().mouse.wasRightButtonClicked() && astral == 0 && target != 1.62f) {
+                        astral = 1;
+                        BlockPos pos = new BlockPos((int) player.getX(), (int) (target - 1.62f + player.getY()), (int) player.getZ());
+                        scroll = target;
+                        if (player.getWorld().getBlockState(pos).isSolidBlock(player.getWorld(), pos) &&
+                                !player.getWorld().getBlockState(pos.up()).isSolidBlock(player.getWorld(), pos.up())) {
+                            ModParticleEffects.play(player,
+                                    null,
+                                    ParticleTypes.GLOW,
+                                    40,
+                                    1,
+                                    20,
+                                    20,
+                                    20);
+                            player.setPos(player.getX(), target - 1.62f + player.getY() + 1, player.getZ());
+                            ModParticleEffects.play(player,
+                                    null,
+                                    ParticleTypes.GLOW,
+                                    40,
+                                    1,
+                                    20,
+                                    20,
+                                    20);
+                        } else {
+                            ModParticleEffects.play(player,
+                                    null,
+                                    ParticleTypes.GLOW,
+                                    40,
+                                    1,
+                                    20,
+                                    20,
+                                    20);
+                            player.setPos(player.getX(), target - 1.62f + player.getY(), player.getZ());
+                            ModParticleEffects.play(player,
+                                    null,
+                                    ParticleTypes.GLOW,
+                                    40,
+                                    1,
+                                    20,
+                                    20,
+                                    20);
+                        }
+                        scroll = 1.62f;
+                        player.calculateDimensions();
+                    }
+                    if (MinecraftClient.getInstance().mouse.wasLeftButtonClicked() && astral == 0 && target != 1.62f) {
+                        astral = 1;
+                    }
+                    if (astral == 1) {
+                        astral = 0;
+                        scroll = 1.62f;
+                        target = 1.62f;
+                    } else {
+                        scroll = target;
+                    }
                     player.calculateDimensions();
 
-                }
-                if (MinecraftClient.getInstance().mouse.wasLeftButtonClicked() && astral == 0 && target != 1.62f){
-                    astral = 1;
-                }
-                if (astral == 1) {
-                    astral = 0;
-                    scroll = 1.62f;
-                    target = 1.62f;
+
                 } else {
-                    scroll = target;
+                    target = 1.62f;
+                    scroll = 1.62f;
+                    dissociated = false;
                 }
-                player.calculateDimensions();
-
-
             } else {
-                target = 1.62f;
-                scroll = 1.62f;
                 dissociated = false;
             }
-        } else {
-            dissociated = false;
         }
-
-
-
-}
 
 
 //.....................WITHER IMMUNE....................................
@@ -1248,5 +1226,4 @@ OH MY LORD IT RAN SO MUCH BETTER
             user.getItemCooldownManager().set(user.getMainHandStack().getItem(), cooldown);
         }
     }
-
 }

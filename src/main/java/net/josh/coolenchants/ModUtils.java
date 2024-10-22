@@ -1,31 +1,18 @@
 package net.josh.coolenchants;
-import net.josh.coolenchants.block.CooledLavaBlock;
-import net.josh.coolenchants.enchantment.ModEnchantments;
 import net.josh.coolenchants.world.dimension.ModDimensions;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.FurnaceBlockEntity;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.InteractionObserver;
-import net.minecraft.entity.Saddleable;
-import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.PositionFlag;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
@@ -34,14 +21,9 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.ChunkStatus;
-import net.minecraft.world.chunk.light.LightSourceView;
 
-import java.util.List;
 import java.util.Set;
 
 public class ModUtils {
@@ -52,6 +34,9 @@ public class ModUtils {
     public static double health = 0;
     public static double mining_speed = 0;
     public static boolean activepearl = false;
+    public static boolean launching = false;
+    public static double launchSpeed = 0;
+    public static double launchCounter = 0;
 
     public static boolean chronoPause = false;
     public static boolean chronoSave = false;
@@ -60,6 +45,7 @@ public class ModUtils {
     public static int chronoCooldown = 0;
     public static int chronoTicker = 0;
     public static boolean challenge = false;
+    public static int challengeLevel = 0;
     public static boolean deflect = false;
     public static boolean deflect2 = false;
     public static int deflectCounter = 0;
@@ -85,6 +71,9 @@ public class ModUtils {
 
     public static boolean goldenApple = false;
     public static boolean timeFreeze = false;
+    public static boolean launch = false;
+    public static boolean gravity = false;
+    public static boolean floating = false;
     public static boolean fireball = false, snowball = false, witherSkull = false, dragonShooter = false, blazeShooter = false;
     public static double wolfhealth = 0;
     public static boolean bowshot = false;
@@ -92,58 +81,16 @@ public class ModUtils {
     public static void print(PlayerEntity player, String str){
         player.sendMessage(Text.literal(str));
     }
-
-    public static boolean safeTeleport(ServerWorld world, BlockPos destination, PlayerEntity player) {
-        var actualDestination = findSafeSpot(world, destination);
-        if (actualDestination == null) return false;
-        double scaledX = 0;
-        double scaledZ = 0;
-
-        //Scale to dimension size (from overworld)
-        if (world.getDimensionKey().equals(ModDimensions.ASTRAL_PLANE_DIM_TYPE)){
-            scaledX = (actualDestination.getX() / 16.0);
-            scaledZ = (actualDestination.getZ() / 16.0);
-        } else {
-            scaledX = (actualDestination.getX() * 16.0);
-            scaledZ = (actualDestination.getZ() * 16.0);
-        }
-
-        //Stay in the world border
-        if (scaledX > 29999984) {
-            scaledX = 29999980;
-        }
-        if (scaledX < -29999984){
-            scaledX = -29999980;
-        }
-        if (scaledZ > 29999984){
-            scaledZ = 29999980;
-        }
-        if (scaledZ < -29999984){
-            scaledZ = -29999980;
-        }
-
-
-
-        Vec3d lookVector = player.getRotationVector();
-        double horzDistance = Math.sqrt(lookVector.x * lookVector.x + lookVector.z * lookVector.z);
-        float yaw = (float) Math.toDegrees(Math.atan2(-lookVector.x, lookVector.z));
-        float pitch = (float) Math.toDegrees(Math.atan2(-lookVector.y, horzDistance));
-
-        player.teleport(
-                world,
-                scaledX + 0.5,
-                (double) actualDestination.getY(),
-                scaledZ + 0.5,
-                Set.of(PositionFlag.X, PositionFlag.Y, PositionFlag.Z),
-                yaw,
-                pitch
-        );
-
-        return true;
+    public static void print(PlayerEntity player, int str){
+        player.sendMessage(Text.literal(String.valueOf(str)));
     }
-    public static boolean safeTeleport(ServerWorld world, BlockPos destination, Entity player) {
+    public static void print(PlayerEntity player, double str){
+        player.sendMessage(Text.literal(String.valueOf(str)));
+    }
+
+    public static void safeTeleport(ServerWorld world, BlockPos destination, Entity player) {
         var actualDestination = findSafeSpot(world, destination);
-        if (actualDestination == null) return false;
+        if (actualDestination == null) return;
         double scaledX = 0;
         double scaledZ = 0;
         if (world.getDimensionKey().equals(ModDimensions.ASTRAL_PLANE_DIM_TYPE)){
@@ -167,8 +114,6 @@ public class ModUtils {
             scaledZ = -29999980;
         }
 
-
-
         Vec3d lookVector = player.getRotationVector();
         double horzDistance = Math.sqrt(lookVector.x * lookVector.x + lookVector.z * lookVector.z);
         float yaw = (float) Math.toDegrees(Math.atan2(-lookVector.x, lookVector.z));
@@ -184,16 +129,29 @@ public class ModUtils {
                 pitch
         );
 
-        return true;
-    }
-    public static BlockPos findSafeSpot(ServerWorld world, BlockPos pos) {
-
         /*
         Since the y position from the overworld gets saved...
         ...as nbt data from the last tp to the astral plane...
         ..., when tp-ing back to the overworld from the astral plane, this tries to keep the original y...
         ...but if it's not safe to tp to with the new x and z, it finds a new safe one
          */
+
+        if (player.getWorld().getBlockState(player.getBlockPos().down()).isAir()){
+            for (int i = 1; i < 100; i++){
+                if (!player.getWorld().getBlockState(player.getBlockPos().down(i)).isAir()){
+                    player.teleport(player.getX(), player.getBlockPos().down(i).up().getY(), player.getZ());
+                    break;
+                }
+                if (!player.getWorld().getBlockState(player.getBlockPos().up(i)).isAir()){
+                    player.teleport(player.getX(), player.getBlockPos().up(i).up().getY(), player.getZ());
+                    break;
+                }
+            }
+        }
+    }
+    public static BlockPos findSafeSpot(ServerWorld world, BlockPos pos) {
+
+
         for (int y = pos.getY(); y < world.getTopY(); y++) {
             BlockPos checkPos = new BlockPos(pos.getX(), y, pos.getZ());
             if (isSafeSpot(world, checkPos)) {
@@ -206,6 +164,18 @@ public class ModUtils {
     public static boolean isSafeSpot(World world, BlockPos pos) {
         BlockState state = world.getBlockState(pos);
         return state.isAir() || !state.isOpaque();
+    }
+
+    public static EntityHitResult raycastEntity(PlayerEntity player, double maxDistance) {
+        Entity cameraEntity = MinecraftClient.getInstance().cameraEntity;
+        if (cameraEntity != null) {
+            Vec3d cameraPos = player.getCameraPosVec(1.0f);
+            Vec3d rot = player.getRotationVec(1.0f);
+            Vec3d rayCastContext = cameraPos.add(rot.x * maxDistance, rot.y * maxDistance, rot.z * maxDistance);
+            Box box = cameraEntity.getBoundingBox().stretch(rot.multiply(maxDistance)).expand(1d, 1d, 1d);
+            return ProjectileUtil.raycast(cameraEntity, cameraPos, rayCastContext, box, (entity -> !entity.isSpectator() && entity.canHit()), maxDistance);
+        }
+        return null;
     }
     public static boolean safeClick(PlayerEntity player, HitResult hitResult, World world, boolean weapon){
 

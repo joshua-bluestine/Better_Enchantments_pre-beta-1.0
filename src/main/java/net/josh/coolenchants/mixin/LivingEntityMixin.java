@@ -56,7 +56,6 @@ public abstract class LivingEntityMixin {
         if (!Objects.equals(ModUtils.removedEntity, "")){
             if (entity.getUuidAsString().contains(ModUtils.removedEntity)){
                 if (!entity.getWorld().isClient()) {
-                    System.out.println("test2");
 
                     ServerWorld serverWorld2 = (ServerWorld) entity.getWorld();
                     Random random = serverWorld2.getRandom();
@@ -72,7 +71,6 @@ public abstract class LivingEntityMixin {
                                 0.0);
                     }
 
-
                     RegistryKey<World> registryKey = entity.getWorld().getRegistryKey() == ModDimensions.ASTRAL_PLANE_LEVEL_KEY ? World.OVERWORLD : ModDimensions.ASTRAL_PLANE_LEVEL_KEY;
                     ServerWorld serverWorld = ((ServerWorld) entity.getWorld()).getServer().getWorld(registryKey);
 
@@ -81,6 +79,20 @@ public abstract class LivingEntityMixin {
                     Vec3d astralPosition = new Vec3d(currentPosition.x, 0, currentPosition.z);
                     BlockPos portalPos = new BlockPos((int) astralPosition.x, (int) astralPosition.y, (int) astralPosition.z);
                     ModUtils.safeTeleport(serverWorld, portalPos, entity);
+                    if (serverWorld != null) {
+                        for (int i = 1; i < 20; ++i) {
+                            serverWorld.spawnParticles(ParticleTypes.GLOW,
+                                    entity.getParticleX(1.0D),
+                                    entity.getY() + 1,
+                                    entity.getParticleZ(1.0D),
+                                    1,
+                                    random.nextGaussian() * 0.2D,
+                                    random.nextGaussian() * 0.2D,
+                                    random.nextGaussian() * 0.2D,
+                                    0.0);
+                        }
+                    }
+
                     ModUtils.removedEntity = "";
                 }
             }

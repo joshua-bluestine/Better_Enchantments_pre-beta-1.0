@@ -6,6 +6,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.WitchEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -46,15 +47,11 @@ public class ReanimatorEnchantment extends Enchantment {
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level){
         michael = target;
-        LivingEntity john = (LivingEntity) target;
-        if (target instanceof LivingEntity && !user.getWorld().isClient) {
-
-            if (john.getGroup() == EntityGroup.UNDEAD && john.getHealth() <= 0) {
+        if (target instanceof LivingEntity john && !user.getWorld().isClient) {
+            if ((john.getGroup() == EntityGroup.UNDEAD || john instanceof WitchEntity) && john.getHealth() <= 0) {
                 ((ZombieEntity) john).convertTo(EntityType.VILLAGER, true);
                 ServerWorld world = (ServerWorld) user.getWorld();
                 BlockPos position = target.getBlockPos();
-                //EntityType.VILLAGER.spawn((ServerWorld) target.getWorld(), target.getBlockPos(), SpawnReason.TRIGGERED);
-
             }
         }
         super.onTargetDamaged(user, target, level);

@@ -6,6 +6,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 
 public class CowSpawnerEnchantment extends Enchantment {
     public int counter = 0;
@@ -45,18 +46,25 @@ public class CowSpawnerEnchantment extends Enchantment {
             ServerWorld world = (ServerWorld) user.getWorld();
             BlockPos position = target.getBlockPos();
             if (target instanceof LivingEntity) {
+                Random random = world.getRandom();
                 // ((LivingEntity) target).setOnFire(true);
                 if (level == 1) {
-                    EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    if (random.nextDouble() > 0.8) {
+                        EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    }
                 }
                 if (level == 2) {
-                    EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
-                    EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    if (random.nextDouble() > 0.6) {
+                        EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    }
                 }
                 if (level == 3) {
-                    EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
-                    EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
-                    EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    if (random.nextDouble() > 0.4) {
+                        EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    }
+                    if (random.nextDouble() > 0.8) {
+                        EntityType.COW.spawn(world, target.getBlockPos(), SpawnReason.TRIGGERED);
+                    }
                 }
             }
         }

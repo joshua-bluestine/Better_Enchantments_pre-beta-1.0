@@ -24,7 +24,7 @@ public class ModBiomes {
             new Identifier(CoolEnchants.MOD_ID, "astral_plain"));
 
     public static void boostrap(Registerable<Biome> context) {
-        context.register(ASTRAL_PLAIN, astralPlain(context));
+        //context.register(ASTRAL_PLAIN, astralPlain(context));
     }
 
     public static void globalOverworldGeneration(GenerationSettings.LookupBackedBuilder builder) {
@@ -37,42 +37,43 @@ public class ModBiomes {
     }
 
     public static Biome astralPlain(Registerable<Biome> context) {
-        SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.DOLPHIN, 2, 3, 5));
+        //SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
+        //spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.DOLPHIN, 2, 3, 5));
 
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
+        //spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
 
-        DefaultBiomeFeatures.addFarmAnimals(spawnBuilder);
-        DefaultBiomeFeatures.addBatsAndMonsters(spawnBuilder);
+        //DefaultBiomeFeatures.addFarmAnimals(spawnBuilder);
+        //DefaultBiomeFeatures.addBatsAndMonsters(spawnBuilder);
 
-        GenerationSettings.LookupBackedBuilder biomeBuilder =
-               new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE),
-                       context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
+       // GenerationSettings.LookupBackedBuilder biomeBuilder =
+       //        new GenerationSettings.LookupBackedBuilder(context.getRegistryLookup(RegistryKeys.PLACED_FEATURE),
+       //                context.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER));
 
-        globalOverworldGeneration(biomeBuilder);
-        DefaultBiomeFeatures.addMossyRocks(biomeBuilder);
-        DefaultBiomeFeatures.addDefaultOres(biomeBuilder);
-        DefaultBiomeFeatures.addExtraGoldOre(biomeBuilder);
+        //globalOverworldGeneration(biomeBuilder);
+       // DefaultBiomeFeatures.addMossyRocks(biomeBuilder);
+       // DefaultBiomeFeatures.addDefaultOres(biomeBuilder);
+       // DefaultBiomeFeatures.addExtraGoldOre(biomeBuilder);
 
-        biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.TREES_PLAINS);
-        DefaultBiomeFeatures.addForestFlowers(biomeBuilder);
-        DefaultBiomeFeatures.addLargeFerns(biomeBuilder);
+       // biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.TREES_PLAINS);
+      //  DefaultBiomeFeatures.addForestFlowers(biomeBuilder);
+       // DefaultBiomeFeatures.addLargeFerns(biomeBuilder);
 
-        DefaultBiomeFeatures.addDefaultMushrooms(biomeBuilder);
-        DefaultBiomeFeatures.addDefaultVegetation(biomeBuilder);
+     //   DefaultBiomeFeatures.addDefaultMushrooms(biomeBuilder);
+       // DefaultBiomeFeatures.addDefaultVegetation(biomeBuilder);
 
-        return new Biome.Builder()
-                .precipitation(true)
-                .downfall(0.4f)
-                .temperature(0.7f)
-                .generationSettings(biomeBuilder.build())
-                .spawnSettings(spawnBuilder.build())
-                .effects((new BiomeEffects.Builder())
-                        .waterColor(0xe82e3b)
-                        .waterFogColor(0xbf1b26)
-                        .skyColor(0x30c918)
-                        .grassColor(0x7f03fc)
-                        .foliageColor(0xd203fc)
-                        .fogColor(0x22a1e6).build()).build();
+      //  return new Biome.Builder()
+     //           .precipitation(true)
+     //           .downfall(0.4f)
+     //           .temperature(0.7f)
+       //         .generationSettings(biomeBuilder.build())
+      //          .spawnSettings(spawnBuilder.build())
+      //          .effects((new BiomeEffects.Builder())
+       //                .waterColor(0xe82e3b)
+       //                 .waterFogColor(0xbf1b26)
+        //                .skyColor(0x30c918)
+        //                .grassColor(0x7f03fc)
+        //                .foliageColor(0xd203fc)
+        //                .fogColor(0x22a1e6).build()).build();
+        return null;
     }
 }

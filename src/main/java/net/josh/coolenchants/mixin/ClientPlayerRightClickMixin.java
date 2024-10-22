@@ -108,10 +108,12 @@ green thumb (more code in hoeitemmixin and farmlandblockmixin)
 
                 }
                 if (ModUtils.isHoldingEnchantedWeapon(player, ModEnchantments.ASTRAL_REMOVE)){
-                    ModUtils.removedEntity = ((LivingEntity)entity).getUuidAsString();
-                    System.out.println(ModUtils.removedEntity);
-                    System.out.println(((LivingEntity) entity).getUuidAsString());
-                    return ActionResult.SUCCESS;
+                    if (((LivingEntity) entity).getHealth() <= 40) {
+                        ModUtils.removedEntity = ((LivingEntity) entity).getUuidAsString();
+                        System.out.println(ModUtils.removedEntity);
+                        System.out.println(((LivingEntity) entity).getUuidAsString());
+                        return ActionResult.SUCCESS;
+                    }
                 }
             }
 
